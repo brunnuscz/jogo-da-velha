@@ -1,2 +1,1 @@
-# jogo-da-velha-java
-☕ Java
+# Jogo da Velha
