@@ -20,6 +20,7 @@ public class Tabuleiro {
 			System.out.println(); // PULAR LINHAS AO MOSTRAR 3 COLUNAS
 		}
 	}
+	// MEOTODO QUE ZERA O TABULEIRO
 	void zerarTabuleiro() {
 		for(int l=0; l<dimensaoDoTabuleiro.linhas; l++) {
 			for(int c=0; c<dimensaoDoTabuleiro.colunas; c++) {

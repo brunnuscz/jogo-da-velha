@@ -9,8 +9,8 @@ public class Jogada{
 	// METODO QUE INSERI NO CAMPO O SIMBOLO PASSANDO JUNTAMENTE COM AS COORDENADAS
 	void realizarJogada(Coordenada coordenada, Jogador jogador, Tabuleiro t) {
 		// VERIFICAR SE O CAMPO TA PREENCHIDO
-		if(t.campo[coordenada.getX()][coordenada.getY()] == null) {
-			t.campo[coordenada.getX()][coordenada.getY()] = jogador.simbolo;
+		if(t.campo[coordenada.x][coordenada.y] == null) {
+			t.campo[coordenada.x][coordenada.y] = jogador.simbolo;
 			validacao = 1;
 			jogadas++;
 		}else {
