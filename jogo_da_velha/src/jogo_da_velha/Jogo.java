@@ -1,17 +1,21 @@
 package jogo_da_velha;
 
+import java.util.ArrayList;
+
 public class Jogo {
-	
-	Tabuleiro tabuleiro = new Tabuleiro();
-	Coordenada coordenada = new Coordenada();
-	Jogada jogada = new Jogada();
-	Resultado r = new Resultado();
-	InterfaceUsuario iu = new InterfaceUsuario();
-	Partida partida = new Partida();
-	int contador;
+	ArrayList<Partida> partidas = new ArrayList<Partida>();
+	Jogador[] jogadores = new Jogador[2];
+	int[] pontGeral = new int[2];
 	
 	void novaPartida(Jogador j1, Jogador j2) {
+		Partida partida = new Partida();
+		
 		// INICIANDO PARTIDA COM AS INFORMAÇÕES PASSADAS
-		partida.iniciarPartida(tabuleiro, coordenada, jogada, r, iu, j1, j2);
+		partida.iniciarPartida(j1, j2, pontGeral);
+		partidas.add(partida);
+	}
+	void salvarJogador(Jogador j1, Jogador j2) {
+		jogadores[0] = j1;
+		jogadores[1] = j2;
 	}
 }

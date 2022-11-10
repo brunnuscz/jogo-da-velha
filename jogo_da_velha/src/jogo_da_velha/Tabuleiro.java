@@ -7,9 +7,9 @@ public class Tabuleiro {
 	String campo[][] = new String[dimensaoDoTabuleiro.linhas][dimensaoDoTabuleiro.colunas];
 	// METODO QUE IMPRIME O TABULEIRO
 	void imprimirTabuleiro() {	
-		System.out.println("\t    0   1   2");
+		System.out.println("\t       0   1   2");
 		for(int l=0; l<dimensaoDoTabuleiro.linhas; l++) { // VAI IMPRIMIR O NÚMERO DE LINHAS INFORMADO
-			System.out.print("\t "+l+" ");
+			System.out.print("\t    "+l+" ");
 			for(int c=0; c<dimensaoDoTabuleiro.colunas; c++) {
 				if(campo[l][c] == null) { // SE O CAMPO TIVER VAZIO
 					System.out.print("[ ] ");								
@@ -18,16 +18,6 @@ public class Tabuleiro {
 				}
 			}
 			System.out.println(); // PULAR LINHAS AO MOSTRAR 3 COLUNAS
-		}
-	}
-	// MEOTODO QUE ZERA O TABULEIRO
-	void zerarTabuleiro() {
-		for(int l=0; l<dimensaoDoTabuleiro.linhas; l++) {
-			for(int c=0; c<dimensaoDoTabuleiro.colunas; c++) {
-				if(campo[l][c] != null) {
-					campo[l][c] = null;								
-				}
-			}
 		}
 	}
 }

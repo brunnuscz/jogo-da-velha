@@ -4,7 +4,7 @@ package jogo_da_velha;
 public class Jogador {
 	String nome;
 	String simbolo;
-	int pontuacao;
+	
 	public String getSimbolo() {
 		return this.simbolo;
 	}

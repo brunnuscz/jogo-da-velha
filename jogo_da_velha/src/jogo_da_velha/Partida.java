@@ -1,29 +1,37 @@
 package jogo_da_velha;
 
+import java.util.ArrayList;
+
 public class Partida {
-	int numPartida = 0;
+	
+	Resultado r = new Resultado();
 	InterfaceUsuario iu = new InterfaceUsuario();
-	public void iniciarPartida(Tabuleiro t, Coordenada c, Jogada j, Resultado r, InterfaceUsuario iu, Jogador j1, Jogador j2) {
-		while(r.verificarVencedor(j1, j2, t) == false && r.verificarEmpate(j, j1, j2) == false) {
-			if(j.jogadas % 2 == 0) {// VEZ DO JOGADOR 1
-				// ENQUANTO NÃO PASSAR COORDENADAS VALIDAS
-				do {
-					t.imprimirTabuleiro();
-					c = iu.pegarCoordenada(j1, t);
-					j.realizarJogada(c, j1, t);					
-				}while(j.validacao == 0);
-			}else { // VEZ DO JOGADOR 2
-				// ENQUANTO NÃO PASSAR COORDENADAS VALIDAS
-				do {
-					t.imprimirTabuleiro();
-					c = iu.pegarCoordenada(j2, t);
-					j.realizarJogada(c, j2, t);					
-				}while(j.validacao == 0);
-			}
+	Tabuleiro tabuleiro = new Tabuleiro();
+	
+	ArrayList<Jogada> jogadas = new ArrayList<Jogada>();
+	
+	int[] pontDaPartida = new int[2];
+	
+	public void iniciarPartida(Jogador j1, Jogador j2, int[] pontGeral) {
+	
+		while(r.verificarVencedor(j1, j2, tabuleiro, pontGeral, pontDaPartida) == false && 
+			  r.verificarEmpate(jogadas, j1, j2, pontGeral, pontDaPartida) == false) {
+			Jogada jogada = new Jogada();
+			do { // ENQUANTO NÃO PASSAR COORDENADAS VALIDAS
+				tabuleiro.imprimirTabuleiro();
+				
+				if((9-jogadas.size()) % 2 == 0) {// VEZ DO JOGADOR 2
+					jogada.realizarJogada(j2, tabuleiro);					
+				}else { // VEZ DO JOGADOR 1
+					jogada.realizarJogada(j1, tabuleiro);				
+				}
+				
+				jogadas.add(jogada);
+			}while(jogada.validacao == false);
 		}
-		numPartida++;
+		
 		// IMPRIME O TABULEIRO UMA ULTIMA VEZ
-		t.imprimirTabuleiro();
+		tabuleiro.imprimirTabuleiro();
 		System.out.println("\n____________________________________\n");		
 	}
 }
