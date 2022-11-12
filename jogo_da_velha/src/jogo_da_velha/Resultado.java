@@ -16,7 +16,7 @@ public class Resultado {
 				System.out.println("____________________________________\n");
 				iu.imprimirTrofeu();
 				System.out.print(" VENCEDOR ");
-				iu.imprimirPonto(um.nome);
+				iu.adicionarPonto(um.nome, 12);
 				System.out.print(" "+um.nome+"\n");
 				System.out.println(" LOCAL .................... LINHA "+l+"\n");
 				return true;
@@ -27,7 +27,7 @@ public class Resultado {
 				System.out.println("____________________________________\n");
 				iu.imprimirTrofeu();
 				System.out.print(" VENCEDOR ");
-				iu.imprimirPonto(dois.nome);
+				iu.adicionarPonto(dois.nome,12);
 				System.out.print(" "+dois.nome+"\n");
 				System.out.println(" LOCAL .................... LINHA "+l+"\n");
 				return true;
@@ -42,7 +42,7 @@ public class Resultado {
 				System.out.println("____________________________________\n");
 				iu.imprimirTrofeu();
 				System.out.print(" VENCEDOR ");
-				iu.imprimirPonto(um.nome);
+				iu.adicionarPonto(um.nome,12);
 				System.out.print(" "+um.nome+"\n");
 				System.out.println(" LOCAL ................... COLUNA "+c+"\n");
 				return true;
@@ -54,7 +54,7 @@ public class Resultado {
 				iu.imprimirTrofeu();
 
 				System.out.print(" VENCEDOR ");
-				iu.imprimirPonto(dois.nome);
+				iu.adicionarPonto(dois.nome,12);
 				System.out.print(" "+dois.nome+"\n");
 				System.out.println(" LOCAL ................... COLUNA "+c+"\n");
 				return true;
@@ -68,7 +68,7 @@ public class Resultado {
 			System.out.println("____________________________________\n");
 			iu.imprimirTrofeu();
 			System.out.print(" VENCEDOR ");
-			iu.imprimirPonto(um.nome);
+			iu.adicionarPonto(um.nome,12);
 			System.out.print(" "+um.nome+"\n");
 			System.out.println(" LOCAL ......... DIAGONAL PRINCIPAL \n");
 			return true;
@@ -79,7 +79,7 @@ public class Resultado {
 			System.out.println("____________________________________\n");
 			iu.imprimirTrofeu();
 			System.out.print(" VENCEDOR ");
-			iu.imprimirPonto(dois.nome);
+			iu.adicionarPonto(dois.nome,12);
 			System.out.print(" "+dois.nome+"\n");
 			System.out.println(" LOCAL ......... DIAGONAL PRINCIPAL \n");
 			return true;
@@ -92,7 +92,7 @@ public class Resultado {
 			System.out.println("____________________________________\n");
 			iu.imprimirTrofeu();
 			System.out.print(" VENCEDOR ");
-			iu.imprimirPonto(um.nome);
+			iu.adicionarPonto(um.nome,12);
 			System.out.print(" "+um.nome+"\n");
 			System.out.println(" LOCAL ........ DIAGONAL SECUNDARIA \n");
 			return true;
@@ -103,7 +103,7 @@ public class Resultado {
 			System.out.println("____________________________________\n");
 			iu.imprimirTrofeu();
 			System.out.print(" VENCEDOR ");
-			iu.imprimirPonto(dois.nome);
+			iu.adicionarPonto(dois.nome,12);
 			System.out.print(" "+dois.nome+"\n");
 			System.out.println(" LOCAL ........ DIAGONAL SECUNDARIA \n");
 			return true;
