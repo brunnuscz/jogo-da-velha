@@ -84,10 +84,10 @@ public class JogoDaVelha {
 				break;	
 			}
 			case 4:{ // RANKING
-				iu.imprimirRanking(jogos);
+				iu.gerarRanking(jogos);
 				break;
 			}
-			case 5:{ // HISTORICO DE PARTIDS
+			case 5:{ // HISTORICO DE PARTIDAS
 				iu.imprimirHistoricoPartidas(jogos);
 				break;
 			}

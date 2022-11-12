@@ -49,16 +49,67 @@ public class InterfaceUsuario {
 		return op;
 	}
 	// CALCULAR PONTUACAO
-	public ArrayList<Jogo> calcularPontuacao(ArrayList<Jogo> j) {
-		//ArrayList<Jogo> jogosOrdenados = new ArrayList<Jogo>();
-		return j;
-	}
-	public void imprimirRanking(ArrayList<Jogo> j) {
-		System.out.println("======== VISUALIZAR RANKING ========\n");
-		
+	public void gerarRanking(ArrayList<Jogo> j) {
+		// LISTA DE JOGOS
+		ArrayList<Jogo> jo = new ArrayList<Jogo>();
 		for(int i=0; i<j.size(); i++) {
-			System.out.println("\t "+j.get(i).jogadores[0].nome+" "+j.get(i).pontGeral[0]+" vs "+j.get(i).pontGeral[1]+" "+j.get(i).jogadores[1].nome);
+			jo.add(j.get(i));
 		}
+		
+		int[] pontVit = new int[jo.size()];
+		int[] pontPer = new int[jo.size()];
+		Jogador[] jogVit = new Jogador[jo.size()];
+		Jogador[] jogPer = new Jogador[jo.size()];
+		
+		// VERIFICAR OS 2 JOGADORES DO JOGO QUEM GANHOU
+		for(int i=0; i<jo.size(); i++) {
+			if(jo.get(i).pontGeral[0] > jo.get(i).pontGeral[1]) {
+				// SALVAR EM UM VETOR O JOGADOR VENCEDOR E A PONTUAÇÃO MAIOR
+				jogVit[i] = jo.get(i).jogadores[0];
+				pontVit[i] = jo.get(i).pontGeral[0];
+				// SALVAR EM UM VETOR O JOGADOR PERDEDOR E A PONTUAÇÃO MENOR
+				jogPer[i] = jo.get(i).jogadores[1];
+				pontPer[i] = jo.get(i).pontGeral[1];
+			}else {
+				jogVit[i] = jo.get(i).jogadores[1];
+				jogPer[i] = jo.get(i).jogadores[0];
+				pontVit[i] = jo.get(i).pontGeral[1];
+				pontPer[i] = jo.get(i).pontGeral[0];
+			}
+		}
+		// CALCULAR QUAL A PONTUAÇÃO MAIOR E QUAL JOGADOR TEM ESSA PONTUAÇÃO
+		for(int p=0; p<pontVit.length; p++) {
+			for(int q=0; q<pontVit.length; q++) {
+				int aux1V = pontVit[p];
+				int aux1P = pontPer[p];
+				Jogador aux2V = jogVit[p];
+				Jogador aux2P = jogPer[p];
+				
+				if(pontVit[p] > pontVit[q]) {
+					pontVit[p] = pontVit[q];
+					jogVit[p] = jogVit[q];
+					
+					pontPer[p] = pontPer[q];
+					jogPer[p] = jogPer[q];
+					
+					pontVit[q] = aux1V;
+					jogVit[q] = aux2V;
+					
+					pontPer[q] = aux1P;
+					jogPer[q] = aux2P;
+				}
+			}
+		}
+		System.out.println("======== VISUALIZAR RANKING ========\n");
+		System.out.println("_____ VENCEDORES vs PERDEDORES _____");
+		for(int i=0; i<jo.size(); i++) {
+			if(pontVit[i] == pontPer[i]) {
+				System.out.println("EMPATE > "+jogVit[i].nome+" "+pontVit[i]+" vs "+pontPer[i]+" "+jogPer[i].nome);				
+			}else {
+				System.out.println("\t "+jogVit[i].nome+" "+pontVit[i]+" vs "+pontPer[i]+" "+jogPer[i].nome);				
+			}
+		}
+		
 		System.out.println("\n====================================\n");
 	}
 	// METODO PARA MOSTRAR OS HISTORICOS PARTIDAS
@@ -69,7 +120,7 @@ public class InterfaceUsuario {
 				System.out.println("Jogo: "+(i+1));
 				System.out.println("Partidas:");
 				for(int p=0; p < j.get(i).partidas.size(); p++) {
-					System.out.println(" > Partida "+(p+1)+": "+j.get(i).jogadores[0].nome+" "+j.get(i).partidas.get(p).pontDaPartida[0]+" vs "+j.get(i).partidas.get(p).pontDaPartida[1]+" "+j.get(i).jogadores[1].nome);
+					System.out.println(" > Partida "+(p+1)+": "+limitaString(j.get(i).jogadores[0].nome)+" "+j.get(i).partidas.get(p).pontDaPartida[0]+" vs "+j.get(i).partidas.get(p).pontDaPartida[1]+" "+limitaString(j.get(i).jogadores[1].nome));
 				}
 				if(j.get(i).pontGeral[0] > j.get(i).pontGeral[1]) {
 					System.out.println(" + Ganhador: "+j.get(i).jogadores[0].nome);
@@ -89,12 +140,16 @@ public class InterfaceUsuario {
 			System.out.println("____________________________________\n");
 				System.out.println("Jogo: "+(i+1));
 				for(int p=0; p < j.get(i).partidas.size(); p++) {
-					System.out.println("\n > Partida "+(p+1)+": ");
+					System.out.println("\n > Partida "+(p+1)+"        Coordenada[x,y]\n");
 					for(int g=0; g < j.get(i).partidas.get(p).jogadas.size(); g++) {
 						if(g % 2 == 0) {
-							System.out.println(" - Jogada "+(g+1)+": "+limitaString(j.get(i).jogadores[0].nome)+" Jogou: ("+j.get(i).jogadores[0].simbolo+") ["+j.get(i).partidas.get(p).jogadas.get(g).coordenada.x+","+j.get(i).partidas.get(p).jogadas.get(g).coordenada.y+"]");							
+							System.out.print(" - Jogada "+(g+1)+": "+limitaString(j.get(i).jogadores[0].nome)+"("+j.get(i).jogadores[0].simbolo+") ");
+							imprimirPontoPartida(limitaString(j.get(i).jogadores[0].nome));
+							System.out.println(" ["+j.get(i).partidas.get(p).jogadas.get(g).coordenada.x+","+j.get(i).partidas.get(p).jogadas.get(g).coordenada.y+"]");							
 						}else {
-							System.out.println(" - Jogada "+(g+1)+": "+limitaString(j.get(i).jogadores[1].nome)+" Jogou: ("+j.get(i).jogadores[1].simbolo+") ["+j.get(i).partidas.get(p).jogadas.get(g).coordenada.x+","+j.get(i).partidas.get(p).jogadas.get(g).coordenada.y+"]");							
+							System.out.print(" - Jogada "+(g+1)+": "+limitaString(j.get(i).jogadores[1].nome)+"("+j.get(i).jogadores[1].simbolo+") ");
+							imprimirPontoPartida(limitaString(j.get(i).jogadores[1].nome));
+							System.out.println(" ["+j.get(i).partidas.get(p).jogadas.get(g).coordenada.x+","+j.get(i).partidas.get(p).jogadas.get(g).coordenada.y+"]");							
 						}
 					}
 				}
@@ -110,12 +165,19 @@ public class InterfaceUsuario {
 		}
 	}
 	public static String limitaString(String texto){
-		   if (texto.length() <= 5){
-		      return texto+" ";
-		   }else{
-		      return texto.substring(0, 4)+".";
-		   }
+	   if (texto.length() <= 6){
+	      return texto+" ";
+	   }else{
+	      return texto.substring(0, 6)+".";
+	   }
+	}
+	public void imprimirPontoPartida(String n){
+		int v = 29 - 17 - n.length(); 
+
+		for(int i=0; i < v; i++) {
+			System.out.print(".");
 		}
+	}
 	void imprimirPontoJogador(String n) {
 		int v = 29 - n.length(); // 36 Nº de espaços, 9 Nº da palavra, n Nº do tamanho do nome
 		
