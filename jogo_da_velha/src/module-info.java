@@ -2,8 +2,8 @@
  * 
  */
 /**
- * @author Bruno
+ * @author brunnu
  *
  */
-module novo_jogo_da_velha {
+module jogo_da_velha {
 }

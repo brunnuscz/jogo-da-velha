@@ -1,16 +1,19 @@
-package jogo_da_velha;
+package model;
 
 import java.util.ArrayList;
+
+import controller.Resultado;
+import view.InterfaceUsuario;
 
 public class Partida {
 	
 	Resultado r = new Resultado();
 	InterfaceUsuario iu = new InterfaceUsuario();
-	Tabuleiro tabuleiro = new Tabuleiro();
+	public Tabuleiro tabuleiro = new Tabuleiro();
 	
-	ArrayList<Jogada> jogadas = new ArrayList<Jogada>();
+	public ArrayList<Jogada> jogadas = new ArrayList<Jogada>();
 	
-	int[] pontDaPartida = new int[2];
+	public int[] pontDaPartida = new int[2];
 	
 	public void iniciarPartida(Jogador j1, Jogador j2, int[] pontGeral) {
 	

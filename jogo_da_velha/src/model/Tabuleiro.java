@@ -1,12 +1,12 @@
-package jogo_da_velha;
+package model;
 
 public class Tabuleiro {
 	// INSTANCIANDO A CLASSE DIMENSAO
-	Dimensao dimensaoDoTabuleiro = new Dimensao(3,3); // PASSANDO VALORES PARA O CONSTRUTOR
+	public Dimensao dimensaoDoTabuleiro = new Dimensao(3,3); // PASSANDO VALORES PARA O CONSTRUTOR
 	// CRIANDO UMA MATRIZ E INFORMANDO O TAMANHO DELA A PARTIR DA DIMENSAO
-	String campo[][] = new String[dimensaoDoTabuleiro.linhas][dimensaoDoTabuleiro.colunas];
+	public String campo[][] = new String[dimensaoDoTabuleiro.linhas][dimensaoDoTabuleiro.colunas];
 	// METODO QUE IMPRIME O TABULEIRO
-	void imprimirTabuleiro() {	
+	public void imprimirTabuleiro() {	
 		System.out.println("\t       0   1   2");
 		for(int l=0; l<dimensaoDoTabuleiro.linhas; l++) { // VAI IMPRIMIR O NÚMERO DE LINHAS INFORMADO
 			System.out.print("\t    "+l+" ");

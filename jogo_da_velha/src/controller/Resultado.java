@@ -1,10 +1,17 @@
-package jogo_da_velha;
+package controller;
 
+import view.InterfaceUsuario;
 import java.util.ArrayList;
+
+import model.Dimensao;
+import model.Jogada;
+import model.Jogador;
+import model.Tabuleiro;
+
 
 public class Resultado {
 	// 36 ESPAÇOS
-	InterfaceUsuario iu = new InterfaceUsuario();
+	public InterfaceUsuario iu = new InterfaceUsuario();
 	public boolean verificarVencedor(Jogador um, Jogador dois, Tabuleiro t, int[] pontGeral, int[] pontDaPartida) {
 		Dimensao d = t.dimensaoDoTabuleiro;
 		// VERIFICAR TODAS AS LINHAS

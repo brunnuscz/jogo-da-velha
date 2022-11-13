@@ -1,9 +1,9 @@
-package jogo_da_velha;
+package model;
 
 // TAMANHO DO TABULEIRO
 public class Dimensao {
-	int linhas;
-	int colunas;
+	public int linhas;
+	public int colunas;
 	
 	Dimensao(int numeroDeLinhas, int numeroDeColunas){
 		this.linhas = numeroDeLinhas;

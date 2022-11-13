@@ -1,9 +1,9 @@
-package jogo_da_velha;
+package model;
 
 // DADOS DO JOGADOR
 public class Jogador {
-	String nome;
-	String simbolo;
+	public String nome;
+	public String simbolo;
 	
 	public String getSimbolo() {
 		return this.simbolo;

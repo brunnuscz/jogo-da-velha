@@ -1,6 +1,9 @@
-package jogo_da_velha;
+package view;
 
 import java.util.ArrayList;
+
+import model.Jogador;
+import model.Jogo;
 
 public class JogoDaVelha {
 	public static void main(String[] args) {

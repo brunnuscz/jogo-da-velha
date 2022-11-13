@@ -1,12 +1,14 @@
-package jogo_da_velha;
+package model;
+
+import view.InterfaceUsuario;
 
 // JOGADA DO JOGADOR
 public class Jogada{
-	InterfaceUsuario iu = new InterfaceUsuario();
-	Coordenada coordenada = new Coordenada();
+	public InterfaceUsuario iu = new InterfaceUsuario();
+	public Coordenada coordenada = new Coordenada();
 	
-	int jogadas = 0;
-	boolean validacao;
+	public int jogadas = 0;
+	public boolean validacao;
 	
 	// METODO QUE INSERI NO CAMPO O SIMBOLO PASSANDO JUNTAMENTE COM AS COORDENADAS
 	void realizarJogada(Jogador jogador, Tabuleiro t) {

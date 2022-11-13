@@ -1,7 +1,12 @@
-package jogo_da_velha;
+package view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import model.Coordenada;
+import model.Jogador;
+import model.Jogo;
+import model.Tabuleiro;
 
 public class InterfaceUsuario {
 	Scanner sc = new Scanner(System.in);
@@ -134,7 +139,7 @@ public class InterfaceUsuario {
 		}
 		System.out.println("\n====================================\n");
 	}
-	void adicionarPonto(String n, int valor) {
+	public void adicionarPonto(String n, int valor) {
 		int v = 36 - valor - n.length(); // 36 NÚMERO DE CARACTERE, valor SERIA OS SIMBOLOS E ESPACOS, n TAMANHO DO NOME
 		for(int i=0; i < v; i++) {
 			System.out.print(".");
@@ -147,7 +152,7 @@ public class InterfaceUsuario {
 	      return texto.substring(0, 6)+".";
 	   }
 	}
-	void imprimirTrofeu() {
+	public void imprimirTrofeu() {
 		System.out.println("               _______");
 		System.out.println(" _\\/_   .``\\  /       \\  /``.  ");
 		System.out.println("  /\\    \\   \\|         |/  /  ");

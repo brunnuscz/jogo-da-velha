@@ -1,7 +1,7 @@
-package jogo_da_velha;
+package model;
 
 // AS COORDENADAS DO TABULEIRO X, Y
 public class Coordenada {
-	int x;
-	int y;
+	public int x;
+	public int y;
 }
