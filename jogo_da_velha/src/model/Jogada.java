@@ -1,14 +1,32 @@
 package model;
 
+import java.util.ArrayList;
+
 import view.InterfaceUsuario;
 
 // JOGADA DO JOGADOR
-public class Jogada{
-	public InterfaceUsuario iu = new InterfaceUsuario();
+public class Jogada extends ElementoDoJogo{
+	ArrayList<ElementoDoJogo> elementos = new ArrayList<ElementoDoJogo>();
+
+	public Jogada(String descricao) {
+		super(descricao);
+	}
+	public void adicionar(ElementoDoJogo ele) {
+		elementos.add(ele);
+	}
+
+	@Override
+	public void exibir() {
+		System.out.println("Jogada: "+descricao);
+		for(ElementoDoJogo e: elementos) {
+			e.exibir();
+		}
+	}
+	InterfaceUsuario iu = InterfaceUsuario.getInstancia();
 	public Coordenada coordenada = new Coordenada();
 	
-	public int jogadas = 0;
-	public boolean validacao;
+	int jogadas = 0;
+	boolean validacao;
 	
 	// METODO QUE INSERI NO CAMPO O SIMBOLO PASSANDO JUNTAMENTE COM AS COORDENADAS
 	void realizarJogada(Jogador jogador, Tabuleiro t) {
@@ -21,7 +39,7 @@ public class Jogada{
 			jogadas++;
 			validacao = true;
 		}else {
-			System.out.println("-------- Campo ja preenchido -------\n");
+			iu.campoJaPreenchidoMsg();
 			validacao = false;
 		}
 	}

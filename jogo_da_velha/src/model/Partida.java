@@ -2,13 +2,28 @@ package model;
 
 import java.util.ArrayList;
 
-import controller.Resultado;
 import view.InterfaceUsuario;
 
-public class Partida {
+public class Partida extends ElementoDoJogo{
+	ArrayList<ElementoDoJogo> elementos = new ArrayList<ElementoDoJogo>();
+
+	public Partida(String descricao) {
+		super(descricao);
+	}
+	public void adicionar(ElementoDoJogo ele) {
+		elementos.add(ele);
+	}
+
+	@Override
+	public void exibir() {
+		System.out.println("Partida: "+descricao);
+		for(ElementoDoJogo e: elementos) {
+			e.exibir();
+		}
+	}
 	
 	Resultado r = new Resultado();
-	InterfaceUsuario iu = new InterfaceUsuario();
+	InterfaceUsuario iu = InterfaceUsuario.getInstancia();
 	public Tabuleiro tabuleiro = new Tabuleiro();
 	
 	public ArrayList<Jogada> jogadas = new ArrayList<Jogada>();
@@ -19,7 +34,7 @@ public class Partida {
 	
 		while(r.verificarVencedor(j1, j2, tabuleiro, pontGeral, pontDaPartida) == false && 
 			  r.verificarEmpate(jogadas, j1, j2, pontGeral, pontDaPartida) == false) {
-			Jogada jogada = new Jogada();
+			Jogada jogada = new Jogada("Jogada");
 			do { // ENQUANTO NÃO PASSAR COORDENADAS VALIDAS
 				tabuleiro.imprimirTabuleiro();
 				
@@ -35,6 +50,6 @@ public class Partida {
 		
 		// IMPRIME O TABULEIRO UMA ULTIMA VEZ
 		tabuleiro.imprimirTabuleiro();
-		System.out.println("\n____________________________________\n");		
+		iu.linhaSeguida();	
 	}
 }
