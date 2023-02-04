@@ -8,7 +8,7 @@ public class Jogo {
 	public int[] pontGeral = new int[2];
 	
 	public void novaPartida(Jogador j1, Jogador j2) {
-		Partida partida = new Partida("Partida");
+		Partida partida = new Partida();
 		
 		// INICIANDO PARTIDA COM AS INFORMAÇÕES PASSADAS
 		partida.iniciarPartida(j1, j2, pontGeral);

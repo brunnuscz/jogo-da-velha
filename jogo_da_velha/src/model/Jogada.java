@@ -1,27 +1,10 @@
 package model;
 
-import java.util.ArrayList;
-
 import view.InterfaceUsuario;
 
 // JOGADA DO JOGADOR
-public class Jogada extends ElementoDoJogo{
-	ArrayList<ElementoDoJogo> elementos = new ArrayList<ElementoDoJogo>();
-
-	public Jogada(String descricao) {
-		super(descricao);
-	}
-	public void adicionar(ElementoDoJogo ele) {
-		elementos.add(ele);
-	}
-
-	@Override
-	public void exibir() {
-		System.out.println("Jogada: "+descricao);
-		for(ElementoDoJogo e: elementos) {
-			e.exibir();
-		}
-	}
+public class Jogada{
+	
 	InterfaceUsuario iu = InterfaceUsuario.getInstancia();
 	public Coordenada coordenada = new Coordenada();
 	
