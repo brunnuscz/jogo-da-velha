@@ -10,6 +10,14 @@ import model.Tabuleiro;
 
 public class InterfaceUsuario {
 	Scanner sc = new Scanner(System.in);
+	private static InterfaceUsuario iu;
+	private InterfaceUsuario() {}
+	public static InterfaceUsuario getInstancia() {
+		if(iu == null) {
+			iu = new InterfaceUsuario();
+		}
+		return iu;
+	}
 	
 	// METODO QUE PEGA AS INFORMAÇÕES DO JOGADOR NO TECLADO
 	public Jogador pegarInfo() {
@@ -53,47 +61,20 @@ public class InterfaceUsuario {
 		System.out.println();
 		return op;
 	}
-	// CALCULAR PONTUACAO
-	public void gerarRanking(ArrayList<Jogo> j) {
-		
-		int[] pontuacoes = new int[j.size()*2];
-		Jogador[] jogadores = new Jogador[j.size()*2];
-		
-		int i = 0;
-		int indice = 0;
-		while(i<pontuacoes.length) {
-			pontuacoes[i] = j.get(indice).pontGeral[0];
-			jogadores[i] = j.get(indice).jogadores[0];
-	
-			pontuacoes[i+1] = j.get(indice).pontGeral[1];
-			jogadores[i+1] = j.get(indice).jogadores[1];	
-			indice++;
-			i = i + 2;
-		}
-		
-		for(int p=0; p<pontuacoes.length; p++) {
-			for(int q=0; q<pontuacoes.length; q++) {
-				int aux1 = pontuacoes[p];
-				Jogador aux2 = jogadores[p];
-				if(pontuacoes[p] > pontuacoes[q]) {
-					pontuacoes[p] = pontuacoes[q];
-					jogadores[p] = jogadores[q];
-					
-					pontuacoes[q] = aux1;
-					jogadores[q] = aux2;
-				}
+	// IMPRIMIR A PONTUACAO NO RANKING
+	public void imprimirRanking(int[] pontVit, int[] pontPer, Jogador[] jogVit, Jogador[] jogPer, ArrayList<Jogo> jo) {
+		System.out.println("======== VISUALIZAR RANKING ========\n");
+		System.out.println("_____ VENCEDORES vs PERDEDORES _____");
+		for(int i=0; i<jo.size(); i++) {
+			if(pontVit[i] == pontPer[i]) {
+				System.out.println("EMPATE > "+jogVit[i].nome+" "+pontVit[i]+" vs "+pontPer[i]+" "+jogPer[i].nome);				
+			}else {
+				System.out.println("\t "+jogVit[i].nome+" "+pontVit[i]+" vs "+pontPer[i]+" "+jogPer[i].nome);				
 			}
 		}
-		System.out.println("======== VISUALIZAR RANKING ========\n");
-		System.out.println(" Nome                     Pontuacao \n");
-		for(int k=0; k<pontuacoes.length; k++) {
-			System.out.print(" "+jogadores[k].nome+" ");				
-			adicionarPonto(jogadores[k].nome, 5);
-			System.out.println(" "+pontuacoes[k]);				
-		}
-		System.out.println("\n====================================\n");
+		
+		System.out.println("\n====================================\n");		
 	}
-	
 	// METODO PARA MOSTRAR OS HISTORICOS PARTIDAS
 	public void imprimirHistoricoPartidas(ArrayList<Jogo> j) {
 		System.out.println("======== HISTORICO PARTIDAS ========");
@@ -126,11 +107,11 @@ public class InterfaceUsuario {
 					for(int g=0; g < j.get(i).partidas.get(p).jogadas.size(); g++) {
 						if(g % 2 == 0) {
 							System.out.print(" - Jogada "+(g+1)+": "+limitaString(j.get(i).jogadores[0].nome)+"("+j.get(i).jogadores[0].simbolo+") ");
-							adicionarPonto(limitaString(j.get(i).jogadores[0].nome),24);
+							imprimirPontoPartida(limitaString(j.get(i).jogadores[0].nome));
 							System.out.println(" ["+j.get(i).partidas.get(p).jogadas.get(g).coordenada.x+","+j.get(i).partidas.get(p).jogadas.get(g).coordenada.y+"]");							
 						}else {
 							System.out.print(" - Jogada "+(g+1)+": "+limitaString(j.get(i).jogadores[1].nome)+"("+j.get(i).jogadores[1].simbolo+") ");
-							adicionarPonto(limitaString(j.get(i).jogadores[1].nome),24);
+							imprimirPontoPartida(limitaString(j.get(i).jogadores[1].nome));
 							System.out.println(" ["+j.get(i).partidas.get(p).jogadas.get(g).coordenada.x+","+j.get(i).partidas.get(p).jogadas.get(g).coordenada.y+"]");							
 						}
 					}
@@ -139,8 +120,9 @@ public class InterfaceUsuario {
 		}
 		System.out.println("\n====================================\n");
 	}
-	public void adicionarPonto(String n, int valor) {
-		int v = 36 - valor - n.length(); // 36 NÚMERO DE CARACTERE, valor SERIA OS SIMBOLOS E ESPACOS, n TAMANHO DO NOME
+	void imprimirPonto(String n) {
+		int v = 32 - 8 - n.length(); // 36 Nº de espaços, 9 Nº da palavra, n Nº do tamanho do nome
+		
 		for(int i=0; i < v; i++) {
 			System.out.print(".");
 		}
@@ -152,7 +134,21 @@ public class InterfaceUsuario {
 	      return texto.substring(0, 6)+".";
 	   }
 	}
-	public void imprimirTrofeu() {
+	public void imprimirPontoPartida(String n){
+		int v = 29 - 17 - n.length(); 
+
+		for(int i=0; i < v; i++) {
+			System.out.print(".");
+		}
+	}
+	void imprimirPontoJogador(String n) {
+		int v = 29 - n.length(); // 36 Nº de espaços, 9 Nº da palavra, n Nº do tamanho do nome
+		
+		for(int i=0; i < v; i++) {
+			System.out.print(".");
+		}
+	}
+	void imprimirTrofeu() {
 		System.out.println("               _______");
 		System.out.println(" _\\/_   .``\\  /       \\  /``.  ");
 		System.out.println("  /\\    \\   \\|         |/  /  ");
@@ -185,11 +181,11 @@ public class InterfaceUsuario {
 		System.out.println("\n============== Jogadores ===========");
 		System.out.println();
 		System.out.print(" "+jogadorUm.nome+" ");
-		adicionarPonto(jogadorUm.nome,7);
+		imprimirPontoJogador(jogadorUm.nome);
 		System.out.println(" ("+jogadorUm.simbolo+") ");
 
 		System.out.print(" "+jogadorDois.nome+" ");
-		adicionarPonto(jogadorDois.nome,7);
+		imprimirPontoJogador(jogadorDois.nome);
 		System.out.println(" ("+jogadorDois.simbolo+") ");
 
 		System.out.println();
@@ -225,5 +221,86 @@ public class InterfaceUsuario {
 		System.out.println();
 		
 		return op;
+	}
+	
+	
+	// MENSAGENS E TÍTULOS
+	public void continuarJogando() {
+		System.out.print("========= CONTINUAR JOGANDO ========\n");
+	}
+	public void novoJogo() {
+		System.out.println("============ NOVO JOGO =============");
+	}
+	public void continuandoJogo() {
+		System.out.print("========= CONTINUANDO JOGO =========\n");
+	}
+	public void jogoInexistenteMsg() {
+		System.out.println("------- Este Jogo nao Existe -------\n");
+	}
+	public void opcaoInvalidaMsg() {
+		System.out.println("---------- Opcao Invalida ----------\n");
+	}
+	public void saindoDoJogoMsg() {
+		System.out.println("-------- Ate Logo Jogadores --------");
+	}
+	public void campoJaPreenchidoMsg() {
+		System.out.println("-------- Campo ja preenchido -------\n");
+	}
+	public void linhaSeguida() {
+		System.out.println("\n____________________________________\n");	
+	}
+	public void mostrarVencedorLinha(Jogador jogador, int l) {
+		System.out.println("____________________________________\n");
+		iu.imprimirTrofeu();
+		System.out.print(" VENCEDOR ");
+		iu.imprimirPonto(jogador.nome);
+		System.out.print(" "+jogador.nome+"\n");
+		System.out.println(" LOCAL .................... LINHA "+l+"\n");
+	}
+	public void mostrarVencedorColuna(Jogador jogador, int c) {
+		System.out.println("____________________________________\n");
+		iu.imprimirTrofeu();
+		System.out.print(" VENCEDOR ");
+		iu.imprimirPonto(jogador.nome);
+		System.out.print(" "+jogador.nome+"\n");
+		System.out.println(" LOCAL ................... COLUNA "+c+"\n");
+	}
+	public void mostrarVencedorDiagonalP(Jogador jogador) {
+		System.out.println("____________________________________\n");
+		iu.imprimirTrofeu();
+		System.out.print(" VENCEDOR ");
+		iu.imprimirPonto(jogador.nome);
+		System.out.print(" "+jogador.nome+"\n");
+		System.out.println(" LOCAL ......... DIAGONAL PRINCIPAL \n");
+	}
+	public void mostrarVencedorDiagonalS(Jogador jogador) {
+		System.out.println("____________________________________\n");
+		iu.imprimirTrofeu();
+		System.out.print(" VENCEDOR ");
+		iu.imprimirPonto(jogador.nome);
+		System.out.print(" "+jogador.nome+"\n");
+		System.out.println(" LOCAL ........ DIAGONAL SECUNDARIA \n");
+	}
+	public void mostrarQuantidadeJogadas(int i) {
+		System.out.println("-------- Faltam "+i+" Jogada(s) --------\n");
+	}
+	public void empateMsg() {
+		System.out.println("____________________________________\n");
+		System.out.println("->  DEU EMPATE\n");
+	}
+	public void mostrarNumeracaoColuna() {
+		System.out.println("\t       0   1   2");
+	}
+	public void mostrarNumerecaoLinha(int l) {
+		System.out.print("\t    "+l+" ");
+	}
+	public void mostrarPosicaoVazia() {
+		System.out.print("[ ] ");		
+	}
+	public void mostrarPosicaoPreenchida(String v) {
+		System.out.print("["+v+"] ");	
+	}
+	public void pularLinha() {
+		System.out.println(); 
 	}
 }

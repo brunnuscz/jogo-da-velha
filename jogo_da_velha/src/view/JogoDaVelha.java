@@ -2,13 +2,23 @@ package view;
 
 import java.util.ArrayList;
 
+import command.Comando;
+import command.ContinuarComando;
+import command.JogoListaComando;
+import command.NovoJogoComando;
+import command.RankingComando;
 import model.Jogador;
 import model.Jogo;
 
+/*
+ * Singleton - Usado na InterfaceUsuario
+ * Command   - Usado nos comandos do Menu
+ * Composite - Usado no Jogo(blocoRaiz)/Partida(bloco)/Jogada(folha)
+ */
+
 public class JogoDaVelha {
 	public static void main(String[] args) {
-		// IU
-		InterfaceUsuario iu = new InterfaceUsuario();
+		InterfaceUsuario iu = InterfaceUsuario.getInstancia();
 		
 		// INSTANCIANDO DOIS OBJETOS DA CLASSE JOGADOR
 		Jogador jogadorUm = iu.pegarInfo();
@@ -28,6 +38,7 @@ public class JogoDaVelha {
 		// ARRAY DE JOGOS
 		ArrayList<Jogo> jogos = new ArrayList<Jogo>();
 		jogos.add(jogo);
+		//ArrayList<Comando> comandos = new ArrayList<Comando>();
 		
 		// ENQUANTO A OPÇÃO NÃO FOR SAIR
 		int op;
@@ -35,59 +46,25 @@ public class JogoDaVelha {
 			op = iu.pegarOpcao();
 			switch (op) {
 			case 1: { // CONTINUAR JOGO
-				System.out.print("========= CONTINUAR JOGANDO ========\n");
-				
-				int posicao = jogos.size(); // TAMANHO DO ARRAY
-				// PEGANDO OS JOGADORES ULTIMO JOGO QUE FORAM SALVOS NO RESULTADO
-				Jogador j1 = jogos.get(posicao-1).jogadores[0]; 
-				Jogador j2 = jogos.get(posicao-1).jogadores[1];
-				
-				// MOSTRAR NA TELA OS JOGADORES QUE VÃO JOGAR NOVAMENTE
-				iu.infoJogador(j1, j2); 
-				
-				jogos.get(posicao-1).novaPartida(j1, j2); // CONTINUAR JOGANDO
-
-				break;	
+				Comando continuarComando = new ContinuarComando();
+				continuarComando.executar(jogos);
+				break;
 			}
 			case 2:{ // NOVO JOGO
-				System.out.println("============ NOVO JOGO =============");
-				Jogador um = iu.pegarInfo();
-				Jogador dois = iu.pegarInfo();
-
-				iu.infoJogador(um,dois); // MONSTRANDO O MENU
-
-				Jogo umNovoJogo = new Jogo();
-				umNovoJogo.salvarJogador(um, dois);
-				umNovoJogo.novaPartida(um, dois); // CONTINUAR JOGANDO
-				
-				jogos.add(umNovoJogo);
+				Comando novoJogoComando = new NovoJogoComando();
+				novoJogoComando.executar(jogos);
+				//comandos.add(novoJogoComando);
+				//jogos.add(umNovoJogo);
 				break;
 			}
 			case 3: { // CONTINUAR JOGO ESCOLHIDO
-				int opicao = iu.menuJogoAnterior(jogos);
-				if(opicao < jogos.size() && opicao >= 0) {
-					System.out.print("========= CONTINUANDO JOGO =========\n");
-					// PEGANDO OS JOGADORES ULTIMO JOGO QUE FORAM SALVOS NO RESULTADO
-					
-					Jogador j1 = jogos.get(opicao).jogadores[0]; 
-					Jogador j2 = jogos.get(opicao).jogadores[1];
-					
-					// MOSTRAR NA TELA OS JOGADORES QUE VÃO JOGAR NOVAMENTE
-					iu.infoJogador(j1, j2);
-					
-					jogos.get(opicao).novaPartida(j1, j2); // CONTINUAR JOGANDO	
-
-					jogos.add(jogos.get(opicao));
-					
-					jogos.remove(opicao);
-				}else {
-					System.out.println("------- Este Jogo nao Existe -------\n");
-				}
-
-				break;	
+				Comando jogoDaListaComando = new JogoListaComando();
+				jogoDaListaComando.executar(jogos);
+				break;
 			}
 			case 4:{ // RANKING
-				iu.gerarRanking(jogos);
+				Comando rankingComando = new RankingComando();
+				rankingComando.executar(jogos);
 				break;
 			}
 			case 5:{ // HISTORICO DE PARTIDAS
@@ -106,11 +83,10 @@ public class JogoDaVelha {
 				break;
 			}
 			default: // NENHUMA OPÇÃO
-				System.out.println("---------- Opcao Invalida ----------\n");
+				iu.opcaoInvalidaMsg();
 				break;
 			}
 		}while(op != 8);
-
-		System.out.println("-------- Ate Logo Jogadores --------");
+		iu.saindoDoJogoMsg();
 	}
 }
