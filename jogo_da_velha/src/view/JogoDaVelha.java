@@ -28,14 +28,13 @@ public class JogoDaVelha {
 		iu.infoJogador(jogadorUm, jogadorDois);
 		
 		// INSTANCIANDO TABULEIRO, COORDENADA, JOGADA, RESULTADO
-		Jogo jogo = new Jogo();
+		Jogo jogo = new Jogo(1);
 		
 		jogo.salvarJogador(jogadorUm, jogadorDois);
 		
 		// CRIANDO UM NOVO JOGO E JÁ INICIALIZANDO UM PARTIDA
-		jogo.novaPartida(jogadorUm, jogadorDois);
+		jogo.novaPartida(jogadorUm, jogadorDois, jogo);
 		
-		// ARRAY DE JOGOS
 		ArrayList<Jogo> jogos = new ArrayList<Jogo>();
 		jogos.add(jogo);
 		//ArrayList<Comando> comandos = new ArrayList<Comando>();
@@ -76,6 +75,9 @@ public class JogoDaVelha {
 				break;
 			}
 			case 7:{ // HISTORICO JOGADA
+				for(int i=0; i<jogos.size();i++) {
+					jogos.get(i).exibir();
+				}
 				iu.imprimirHistoricoJogadas(jogos);
 				break;
 			}

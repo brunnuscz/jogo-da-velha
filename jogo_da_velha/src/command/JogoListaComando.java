@@ -21,7 +21,7 @@ public class JogoListaComando implements Comando{
 			// MOSTRAR NA TELA OS JOGADORES QUE VÃO JOGAR NOVAMENTE
 			iu.infoJogador(j1, j2);
 			
-			jogos.get(opicao).novaPartida(j1, j2); // CONTINUAR JOGANDO	
+			jogos.get(opicao).novaPartida(j1, j2, jogos.get(opicao)); // CONTINUAR JOGANDO	
 	
 			jogos.add(jogos.get(opicao));
 			

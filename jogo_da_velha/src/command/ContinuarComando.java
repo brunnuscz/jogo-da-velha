@@ -19,7 +19,7 @@ public class ContinuarComando implements Comando{
 		
 		// MOSTRAR NA TELA OS JOGADORES QUE VÃO JOGAR NOVAMENTE
 		iu.infoJogador(j1, j2); 
-		jogos.get(posicao-1).novaPartida(j1, j2); // CONTINUAR JOGANDO
+		jogos.get(posicao-1).novaPartida(j1, j2, jogos.get(posicao-1)); // CONTINUAR JOGANDO
 		
 	}
 }

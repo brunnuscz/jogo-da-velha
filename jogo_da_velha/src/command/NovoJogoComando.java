@@ -15,9 +15,9 @@ public class NovoJogoComando implements Comando{
 		Jogador um = iu.pegarInfo();
 		Jogador dois = iu.pegarInfo();
 		iu.infoJogador(um,dois); // MONSTRANDO O MENU
-		Jogo umNovoJogo = new Jogo();
+		Jogo umNovoJogo = new Jogo(jogos.size()+1);
 		umNovoJogo.salvarJogador(um, dois);
-		umNovoJogo.novaPartida(um, dois); // CONTINUAR JOGANDO
+		umNovoJogo.novaPartida(um, dois, umNovoJogo); // CONTINUAR JOGANDO
 		
 		jogos.add(umNovoJogo);
 	}
