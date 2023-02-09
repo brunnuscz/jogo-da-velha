@@ -35,6 +35,7 @@ O objetivo com este projeto é fazer o jogo da velha, utilizando boas práticas 
     │ │ └── Dimensao.java
     │ │ └── Jogada.java
     │ │ └── Jogador.java
+    │ │ └── ElementoDoJogo.java
     │ │ └── Jogo.java
     │ │ └── Partida.java
     │ │ └── Resultado.java
