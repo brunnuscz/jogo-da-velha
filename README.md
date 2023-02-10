@@ -6,7 +6,7 @@
 
 ## 🕹️ Jogo da Velha
 
-O objetivo com este projeto é fazer o jogo da velha, utilizando boas práticas do uso da orientação a objetos e aplicando padrões de projetos. Os padrões utilizados foram: Singleton, Command e o Observer.
+O objetivo com este projeto é fazer o jogo da velha, utilizando boas práticas do uso da orientação a objetos e aplicando padrões de projetos. Os padrões utilizados foram: Singleton, Command e o Composite.
 
 ## 📁 Projeto
 ### 📍 Fazendo o clone do repositório:
